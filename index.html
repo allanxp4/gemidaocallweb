@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Gemidão Call Web</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha256-ZT4HPpdCOt2lvDkXokHuhJfdOKSPFLzeAJik5U/Q+l4=" crossorigin="anonymous" />
+   
+</head>
+<body>
+    <div class="container">
+        <div class="row">            
+            <div class="col-md-4 col-sm-12 col-md-offset-4">
+                <h2>Gemidão do zap caller              
+                </h2>
+                <h5>Envie o gemidão para o telefone de quem quiser!</h5>
+                <div class="form-group">
+                    <label for="telefone">Telefone</label>
+                    <input type="text" minlength="10" maxlength="11" class="form-control" id="telefone">
+                </div>
+                <div class="form-group">
+                    <label for="key">Key (pegue uma em <a href="http://www.totalvoice.com.br/">http://www.totalvoice.com.br/</a>)</label>
+                    <input type="text" class="form-control" id="key">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" onclick="enviar()">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function enviar(){
+            var tel = $('#telefone').val();
+            var key = $('#key').val();
+
+            $.ajax({
+                url: 'https://api.totalvoice.com.br/audio',
+                data: {
+                    "numero_destino": tel,
+                    "url_audio": "http://prtnsrc.com/2545.mp3",                       
+                },
+                type: 'POST',
+                headers: {
+                    "Access-Token": key,
+                    "Accept": "application/json",                  
+                 
+                }
+            })
+            .done(function(){
+                alert("Ligação efetuada!");
+            })
+            .fail(function(xhr, status, error){
+                alert("Erro ao enviar, " + xhr.responseJSON.mensagem);
+            })
+            
+            }
+           
+    </script>
+</body>
+</html>
