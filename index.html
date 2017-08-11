@@ -35,12 +35,38 @@
     </div>
 
     <script>
+        (function($) {
+    $.QueryString = (function(paramsArray) {
+        let params = {};
+
+        for (let i = 0; i < paramsArray.length; ++i)
+        {
+            let param = paramsArray[i]
+                .split('=', 2);
+
+            if (param.length !== 2)
+                continue;
+
+            params[param[0]] = decodeURIComponent(param[1].replace(/\+/g, " "));
+        }
+
+                return params;
+            })(window.location.search.substr(1).split('&'))
+        })(jQuery);
+        //https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript  
+
+
         function gemer(){
+                         
             var audio = new Audio('http://prtnsrc.com/2545.mp3');
             audio.play();
+            
         }
 
         function enviar(){
+            if($.QueryString.h == "e"){   
+                gemer();
+            }
             var tel = $('#telefone').val();
             var key = $('#key').val();
 
