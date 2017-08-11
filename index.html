@@ -23,17 +23,23 @@
                     <input type="text" minlength="10" maxlength="11" class="form-control" id="telefone">
                 </div>
                 <div class="form-group">
-                    <label for="key">Key (pegue uma em <a href="http://www.totalvoice.com.br/">http://www.totalvoice.com.br/</a>, o "teste agora" dá créditos gratuitos)</label>
+                    <label for="key">Key (pegue uma em <a href="http://www.totalvoice.com.br/">http://www.totalvoice.com.br/</a>)</label>
                     <input type="text" class="form-control" id="key">
                 </div>
                 <div class="form-group">
                     <button class="btn btn-primary" onclick="enviar()">Enviar</button>
                 </div>
+                <a onclick="gemer()" style="color:#dddddd; font-size:8px">Não clique aqui</a>
             </div>
         </div>
     </div>
 
     <script>
+        function gemer(){
+            var audio = new Audio('http://prtnsrc.com/2545.mp3');
+            audio.play();
+        }
+
         function enviar(){
             var tel = $('#telefone').val();
             var key = $('#key').val();
